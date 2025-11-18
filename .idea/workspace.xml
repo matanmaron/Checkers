@@ -7,7 +7,6 @@
     <list default="true" id="adfe04c6-f427-48a5-9530-bcf4370096a4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Moves.py" beforeDir="false" afterPath="$PROJECT_DIR$/Moves.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +73,7 @@
       <updated>1763442256987</updated>
       <workItem from="1763442267731" duration="3686000" />
       <workItem from="1763451237996" duration="538000" />
-      <workItem from="1763452691136" duration="1233000" />
+      <workItem from="1763452691136" duration="1904000" />
     </task>
     <task id="LOCAL-00001" summary="update to python 3">
       <option name="closed" value="true" />
@@ -100,7 +99,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763453585040</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fix mouse pos">
+      <option name="closed" value="true" />
+      <created>1763454030241</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1763454030241</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,7 +131,8 @@
     <MESSAGE value="update to python 3" />
     <MESSAGE value="integrated sound" />
     <MESSAGE value="fix print" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix print" />
+    <MESSAGE value="fix mouse pos" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix mouse pos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -141,10 +149,6 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Moves.py</url>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

@@ -2,6 +2,20 @@ import Game as game
 import Colors as colors
 import pygame
 import Buttons as buttons
+import os
+import sys
+
+# --------------------
+# Helper to get resource path (works with PyInstaller)
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+# --------------------
+
 
 def ckEatUpDown(MoveDown, otherPlayer,otherKing, List, x,y ,AllDirection):
     if AllDirection:
@@ -126,7 +140,7 @@ def gameAnalizeMove(gamedisplay,isPlayer1, curX, curY):
 
 def Move(curX,curY,x,y,isPlayer1):
     if game.soundOn:
-        MoveSound = pygame.mixer.Sound("move.wav")
+        MoveSound = pygame.mixer.Sound(resource_path("move.wav"))
         pygame.mixer.Sound.play(MoveSound)
     if isPlayer1:
         curPlayer = 1
@@ -158,7 +172,7 @@ def Move(curX,curY,x,y,isPlayer1):
 
 def Eat(srcX,srcY,destX,destY,isPlayer1):
     if game.soundOn:
-        EatSound = pygame.mixer.Sound("eat.wav")
+        EatSound = pygame.mixer.Sound(resource_path("eat.wav"))
         pygame.mixer.Sound.play(EatSound)
     if isPlayer1:
         curPlayer = 1
