@@ -27,64 +27,60 @@ while not gameExit:
     for event in pygame.event.get():
         #draw screen
         gamedisplay.fill(colors.gray)
+
         # quit esc or x-click
         if event.type == pygame.QUIT:
             gameExit = True
+
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_q or pygame.K_ESCAPE:
+            if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
                 gameExit = True
+
+        # handle mouse clicks
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            x, y = pygame.mouse.get_pos()
+            x, y = x // game.sizeofrect, y // game.sizeofrect  # integer division
+
+            if game.inGame:
+                List = moves.gameMoveHave2Eat(game.isPlayer1)
+                if len(List) != 0:
+                    game.isPlayer1 = moves.gameAnalizeHave2Eat(gamedisplay, game.isPlayer1, List, False)
+                elif 0 <= x < 8 and 0 <= y < 8:
+                    game.isPlayer1 = moves.gameAnalizeMove(gamedisplay, game.isPlayer1, x, y)
+                elif (x, y) in [(9, 6), (10, 6), (11, 6)]:  # clicked back
+                    buttons.ButtonBack(gamedisplay, colors.green)
+                    pygame.display.update()
+                    game.gameReset()
+                    game.inGame = False
+            else:  # main menu
+                if (x,y) in [(9,1),(10,1),(11,1)]:  # clicked start
+                    buttons.ButtonStart(gamedisplay, colors.green)
+                    pygame.display.update()
+                    game.inGame = True
+                elif (x,y) in [(9,3),(10,3),(11,3)]:  # clicked settings
+                    buttons.ButtonSound(gamedisplay, colors.green)
+                    pygame.display.update()
+                    game.soundOn = not game.soundOn
+                elif (x,y) in [(9,6),(10,6),(11,6)]:  # clicked exit
+                    buttons.ButtonExit(gamedisplay, colors.green)
+                    pygame.display.update()
+                    gameExit = True
+
         #logic
-        elif game.inGame:#main game loop
+        elif game.inGame:  # main game drawing
             game.Drawboard(gamedisplay)
-            buttons.ButtonBack(gamedisplay,colors.white)
+            buttons.ButtonBack(gamedisplay, colors.white)
             if not game.isOver():
                 buttons.nowPlayertext(gamedisplay, game.isPlayer1)
             if game.isOver():
                 buttons.GameOver(gamedisplay, game.isPlayer1)
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    x, y = pygame.mouse.get_pos()
-                    x, y = x / game.sizeofrect, y / game.sizeofrect
-                    if (x, y) == (9, 6) or (x, y) == (10, 6) or (x, y) == (11, 6):  # clicked back
-                        buttons.ButtonBack(gamedisplay, colors.green)
-                        pygame.display.update()
-                        game.gameReset()
-                        game.inGame = False
-            else:
-                List = moves.gameMoveHave2Eat(game.isPlayer1)
-                if len(List)!=0:
-                    #have 2 eat
-                    game.isPlayer1 = moves.gameAnalizeHave2Eat(gamedisplay,game.isPlayer1,List, False)
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    x, y = pygame.mouse.get_pos()
-                    x, y = x / game.sizeofrect, y / game.sizeofrect
-                    if (x, y) == (9, 6) or (x, y) == (10, 6) or (x, y) == (11, 6):  #clicked back
-                        buttons.ButtonBack(gamedisplay, colors.green)
-                        pygame.display.update()
-                        game.gameReset()
-                        game.inGame = False
-                    elif (x>=0 and x<8 and y>=0 and y<8): #limit to board
-                        game.isPlayer1 = moves.gameAnalizeMove(gamedisplay,game.isPlayer1, x, y)
-        else:#main menu
+
+        else:  # main menu drawing
             game.DrawPieces()
             buttons.MainMenu(gamedisplay)
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                x,y = pygame.mouse.get_pos()
-                x,y = x/game.sizeofrect, y/game.sizeofrect
-                if (x,y)==(9,1) or (x,y)==(10,1) or (x,y)==(11,1):#clicked start
-                    buttons.ButtonStart(gamedisplay, colors.green)
-                    pygame.display.update()
-                    game.inGame = True
-                if (x, y) == (9, 3) or (x, y) == (10, 3) or (x, y) == (11, 3):#clicked settings
-                    buttons.ButtonSound(gamedisplay, colors.green)
-                    pygame.display.update()
-                    game.soundOn = not game.soundOn
-                if (x, y) == (9, 6) or (x, y) == (10, 6) or (x, y) == (11, 6):#clicked exit
-                    buttons.ButtonExit(gamedisplay,colors.green)
-                    pygame.display.update()
-                    gameExit = True
+
         #screen update
         pygame.display.update()
-
 
 pygame.quit()
 quit()
