@@ -43,7 +43,7 @@ while not gameExit:
                 buttons.GameOver(gamedisplay, game.isPlayer1)
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = pygame.mouse.get_pos()
-                    x, y = x / game.sizeofrect, y / game.sizeofrect
+                    x, y = x // game.sizeofrect, y // game.sizeofrect
                     if (x, y) == (9, 6) or (x, y) == (10, 6) or (x, y) == (11, 6):  # clicked back
                         buttons.ButtonBack(gamedisplay, colors.green)
                         pygame.display.update()
@@ -56,7 +56,7 @@ while not gameExit:
                     game.isPlayer1 = moves.gameAnalizeHave2Eat(gamedisplay,game.isPlayer1,List, False)
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = pygame.mouse.get_pos()
-                    x, y = x / game.sizeofrect, y / game.sizeofrect
+                    x, y = x // game.sizeofrect, y // game.sizeofrect
                     if (x, y) == (9, 6) or (x, y) == (10, 6) or (x, y) == (11, 6):  #clicked back
                         buttons.ButtonBack(gamedisplay, colors.green)
                         pygame.display.update()
@@ -69,7 +69,7 @@ while not gameExit:
             buttons.MainMenu(gamedisplay)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x,y = pygame.mouse.get_pos()
-                x,y = x/game.sizeofrect, y/game.sizeofrect
+                x,y = x//game.sizeofrect, y//game.sizeofrect
                 if (x,y)==(9,1) or (x,y)==(10,1) or (x,y)==(11,1):#clicked start
                     buttons.ButtonStart(gamedisplay, colors.green)
                     pygame.display.update()

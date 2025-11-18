@@ -86,7 +86,7 @@ def gameAnalizeMove(gamedisplay,isPlayer1, curX, curY):
                 for event in pygame.event.get():
                         if event.type == pygame.MOUSEBUTTONDOWN:
                             nextX, nextY = pygame.mouse.get_pos()
-                            nextX, nextY = nextX / game.sizeofrect, nextY / game.sizeofrect
+                            nextX, nextY = nextX // game.sizeofrect, nextY // game.sizeofrect
                             if (nextX, nextY) == (9, 6) or (nextX, nextY) == (10, 6) or (nextX, nextY) == (11, 6):  # clicked back
                                 buttons.ButtonBack(gamedisplay, colors.green)
                                 pygame.display.update()
@@ -416,7 +416,7 @@ def gameAnalizeHave2Eat(gamedisplay,isPlayer1,List, isSecondMove):
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = pygame.mouse.get_pos()
-                x, y = x / game.sizeofrect, y / game.sizeofrect
+                x, y = x // game.sizeofrect, y // game.sizeofrect
                 if (x, y) == (9, 6) or (x, y) == (10, 6) or (x, y) == (11, 6):  # clicked back
                     buttons.ButtonBack(gamedisplay, colors.green)
                     pygame.display.update()
@@ -443,7 +443,7 @@ def gameAnalizeHave2Eat(gamedisplay,isPlayer1,List, isSecondMove):
                                 for event in pygame.event.get():
                                     if event.type == pygame.MOUSEBUTTONDOWN:
                                         nextX, nextY = pygame.mouse.get_pos()
-                                        nextX, nextY = nextX / game.sizeofrect, nextY / game.sizeofrect
+                                        nextX, nextY = nextX // game.sizeofrect, nextY // game.sizeofrect
                                         if (nextX, nextY) == (9, 6) or (nextX, nextY) == (10, 6) or (nextX, nextY) == (
                                                 11, 6):  # clicked back
                                             buttons.ButtonBack(gamedisplay, colors.green)
