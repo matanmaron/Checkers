@@ -3,74 +3,6 @@ import Colors as colors
 import pygame
 import Buttons as buttons
 
-def Move(curX,curY,x,y,isPlayer1):
-    if game.soundOn:
-        MoveSound = pygame.mixer.Sound("move.wav")
-        pygame.mixer.Sound.play(MoveSound)
-    if isPlayer1:
-        curPlayer = 1
-        curKing = 10
-    else:
-        curPlayer = 2
-        curKing = 20
-
-    if game.board[curX,curY] == curPlayer:
-        cur=curPlayer
-    elif game.board[curX,curY] == curKing:
-        cur = curKing
-    else:
-        print ("got problem...")
-        return False
-    if (x-1,y+1) == (curX,curY):
-        game.board[curX,curY] = 0
-        game.board[x, y] = cur
-    elif (x+1,y+1) == (curX,curY):
-        game.board[curX, curY] = 0
-        game.board[x, y] = cur
-    elif (x - 1, y - 1) == (curX, curY):
-        game.board[curX, curY] = 0
-        game.board[x, y] = cur
-    elif (x + 1, y - 1) == (curX, curY):
-        game.board[curX, curY] = 0
-        game.board[x, y] = cur
-    game.KingsEverywhere()
-
-def Eat(srcX,srcY,destX,destY,isPlayer1):
-    if game.soundOn:
-        EatSound = pygame.mixer.Sound("eat.wav")
-        pygame.mixer.Sound.play(EatSound)
-    if isPlayer1:
-        curPlayer = 1
-        curKing = 10
-    else:
-        curPlayer = 2
-        curKing = 20
-
-    if game.board[srcX,srcY] == curPlayer:
-        cur=curPlayer
-    elif game.board[srcX,srcY] == curKing:
-        cur = curKing
-    else:
-        print ("got problem...")
-        return False
-    if (srcX-2,srcY+2) == (destX,destY):
-        game.board[srcX,srcY] = 0
-        game.board[srcX-1,srcY+1] = 0
-        game.board[destX, destY] = cur
-    elif (srcX+2,srcY+2) == (destX,destY):
-        game.board[srcX, srcY] = 0
-        game.board[srcX + 1, srcY + 1] = 0
-        game.board[destX, destY] = cur
-    elif (srcX - 2, srcY - 2) == (destX, destY):
-        game.board[srcX, srcY] = 0
-        game.board[srcX - 1, srcY - 1] = 0
-        game.board[destX, destY] = cur
-    elif (srcX + 2, srcY - 2) == (destX, destY):
-        game.board[srcX, srcY] = 0
-        game.board[srcX + 1, srcY - 1] = 0
-        game.board[destX, destY] = cur
-    game.KingsEverywhere()
-
 def CanMove(curX,curY,x,y,isPlayer1, AllDirections):
     canMove = False
     if isPlayer1:
@@ -470,3 +402,51 @@ def gameAnalizeHave2Eat(gamedisplay,isPlayer1,List, isSecondMove):
                                                     # have 2 eat AGAIN !
                                                     gameAnalizeHave2Eat(gamedisplay,isPlayer1,newList,True)
                                                 return not isPlayer1
+def Move(curX, curY, x, y, isPlayer1):
+    if game.soundOn:
+        MoveSound = pygame.mixer.Sound("move.wav")
+        pygame.mixer.Sound.play(MoveSound)
+    if isPlayer1:
+        curPlayer = 1
+        curKing = 10
+    else:
+        curPlayer = 2
+        curKing = 20
+
+    if game.board[curX, curY] == curPlayer:
+        cur = curPlayer
+    elif game.board[curX, curY] == curKing:
+        cur = curKing
+    else:
+        print("got problem...")
+        return False
+
+    game.board[curX, curY] = 0
+    game.board[x, y] = cur
+    game.KingsEverywhere()
+
+
+def Eat(srcX, srcY, destX, destY, isPlayer1):
+    if game.soundOn:
+        EatSound = pygame.mixer.Sound("eat.wav")
+        pygame.mixer.Sound.play(EatSound)
+    if isPlayer1:
+        curPlayer = 1
+        curKing = 10
+    else:
+        curPlayer = 2
+        curKing = 20
+
+    if game.board[srcX, srcY] == curPlayer:
+        cur = curPlayer
+    elif game.board[srcX, srcY] == curKing:
+        cur = curKing
+    else:
+        print("got problem...")
+        return False
+
+    # remove eaten piece
+    game.board[srcX, srcY] = 0
+    game.board[(srcX + destX)//2, (srcY + destY)//2] = 0
+    game.board[destX, destY] = cur
+    game.KingsEverywhere()

@@ -7,25 +7,37 @@ import Colors as colors
 import Game as game
 import Moves as moves
 import Buttons as buttons
+import sys
+import os
 
 pygame.mixer.pre_init(44100, -16, 1, 512)
 pygame.mixer.init()
 pygame.init()
 
+# Helper to load resources correctly in PyInstaller --onefile
+def resource_path(relative_path):
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
+# Override sound loading in Game module
+game.MoveSoundPath = resource_path("move.wav")
+game.EatSoundPath = resource_path("eat.wav")
+
 gamedisplay = pygame.display.set_mode((640,400))
 pygame.display.set_caption("chekers!")
 
-#gloals
+# globals
 gameExit = False
 insettings = False
 lastx, lasty = -1,-1
 drawNewboard = False
 
-#code here
+# code here
 while not gameExit:
 
     for event in pygame.event.get():
-        #draw screen
+        # draw screen
         gamedisplay.fill(colors.gray)
 
         # quit esc or x-click
@@ -66,7 +78,7 @@ while not gameExit:
                     pygame.display.update()
                     gameExit = True
 
-        #logic
+        # logic
         elif game.inGame:  # main game drawing
             game.Drawboard(gamedisplay)
             buttons.ButtonBack(gamedisplay, colors.white)
@@ -79,7 +91,7 @@ while not gameExit:
             game.DrawPieces()
             buttons.MainMenu(gamedisplay)
 
-        #screen update
+        # screen update
         pygame.display.update()
 
 pygame.quit()
