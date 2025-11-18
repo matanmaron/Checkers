@@ -140,7 +140,7 @@ def Move(curX,curY,x,y,isPlayer1):
     elif game.board[curX,curY] == curKing:
         cur = curKing
     else:
-        print "got problem..."
+        print ("got problem...")
         return False
     if (x-1,y+1) == (curX,curY):
         game.board[curX,curY] = 0
@@ -172,7 +172,7 @@ def Eat(srcX,srcY,destX,destY,isPlayer1):
     elif game.board[srcX,srcY] == curKing:
         cur = curKing
     else:
-        print "got problem..."
+        print ("got problem...")
         return False
     if (srcX-2,srcY+2) == (destX,destY):
         game.board[srcX,srcY] = 0
@@ -355,7 +355,7 @@ def getMoveOnCur(gamedisplay,isPlayer1,x,y):
     elif game.board[x, y] == curKing:
         haveList = ckMoveUpDown(not moveDown, otherPlayer, otherKing, haveList, x, y,True)
     else:
-        print "got problem..."
+        print ("got problem...")
         return
     return haveList
 
